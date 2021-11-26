@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.objectfrontier.student.Exception.StudentControllerException;
-import com.objectfrontier.student.Exception.StudentServiceException;
 import com.objectfrontier.student.bean.Student;
+import com.objectfrontier.student.exception.StudentControllerException;
+import com.objectfrontier.student.exception.InvalidInputException;
 import com.objectfrontier.student.service.StudentServiceInterface;
 
 @RestController
@@ -29,21 +29,10 @@ public class StudentController {
 	
 	//Adding student information into the db.
 	@PostMapping("/addStudent")
-	public ResponseEntity<?> addStudent(@RequestBody Student student) {
+	public ResponseEntity<Student> addStudent(@RequestBody Student student) {
 		
-		try {
 			Student studentSaved = studentServieInterface.addStudent(student);
 			return new ResponseEntity<Student>(studentSaved,HttpStatus.CREATED);
-		}
-		catch(StudentServiceException e) {
-			return new ResponseEntity<StudentControllerException>(new StudentControllerException(e.getErrorCode(),e.getErrorMessage()), HttpStatus.BAD_REQUEST);
-		}
-		catch(Exception e) {
-			StudentControllerException sce= new StudentControllerException("606", "Something went wrong in controller layer" + e.getMessage());
-			return new ResponseEntity<StudentControllerException>(sce, HttpStatus.BAD_REQUEST);
-		}
-		
-		
 	}
 	
 	//Retrieve list of student records from the db

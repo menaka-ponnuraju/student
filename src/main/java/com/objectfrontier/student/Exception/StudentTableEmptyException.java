@@ -3,7 +3,7 @@ package com.objectfrontier.student.exception;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StudentControllerException extends RuntimeException{
+public class StudentTableEmptyException extends RuntimeException{
 	
 	/**
 	 * 
@@ -15,6 +15,7 @@ public class StudentControllerException extends RuntimeException{
 	public String getErrorCode() {
 		return errorCode;
 	}
+	
 	public void setErrorCode(String errorCode) {
 		this.errorCode = errorCode;
 	}
@@ -27,13 +28,14 @@ public class StudentControllerException extends RuntimeException{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public StudentControllerException(String errorCode, String errorMessage) {
+	
+	public StudentTableEmptyException(String errorCode, String errorMessage) {
 		super();
 		this.errorCode = errorCode;
 		this.errorMessage = errorMessage;
 	}
 	
-	public StudentControllerException() {
+	public StudentTableEmptyException() {
 		
 	}
 
